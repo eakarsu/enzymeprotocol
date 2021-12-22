@@ -44,3 +44,40 @@ Please note that all repositories hosted under this organization follow our [Cod
 ### Security Issues
 
 If you find a vulnerability that may affect live or testnet deployments, please send your report privately to [security@enzyme.finance](mailto:security@enzyme.finance). Please **DO NOT** file a public issue.
+When you run
+npx hardhat node
+in one terminal.
+
+you need to run
+npx hardhat console --network localhost
+
+to connect to same block chain network. Otherwise you will get error: WARNING: Calling an account which is not a contract
+
+In order to achieve this, we need to add this into network section of hardhat conf
+localhost: {
+accounts: ["0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80","0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d"],
+chainId: 1,
+//chainId: 31337,
+loggingEnabled: true,
+url: "http://localhost:8545",
+timeout: 10000000
+},
+
+where I have started a empty hardhat node and
+npx hardhat --network localhost deploy
+Please delete deployment and cache folders before installing local redhat block chain network
+
+Empty hardhat node was configured as
+hardhat: {
+accounts: {
+accountsBalance: "100000000000000000000000000000000000000",
+count: 5,
+mnemonic,
+},
+//chainId: 31337,
+chainId: 1,
+forking: {
+blockNumber: 13619920, // Nov 15, 2021
+url: "https://eth-mainnet.alchemyapi.io/v2/4gZBZgXw-GGmzJF3R6FTJvXKNK_XDTJn",
+},
+},
