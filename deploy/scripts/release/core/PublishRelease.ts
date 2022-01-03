@@ -16,6 +16,7 @@ const fn: DeployFunction = async function (hre) {
   await dispatcherInstance.setCurrentFundDeployer(fundDeployer.address);
 
   const fundDeployerInstance = new FundDeployer(fundDeployer.address, deployer);
+  console.log('Publish released for funddeployer:' + fundDeployer.address);
   await fundDeployerInstance.setReleaseLive();
 
   const protocolFeeTrackerInstance = new ProtocolFeeTracker(protocolFeeTracker.address, deployer);

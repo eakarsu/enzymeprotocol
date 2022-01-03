@@ -20,6 +20,7 @@ import "../utils/ExtensionBase.sol";
 import "../utils/PermissionedVaultActionMixin.sol";
 import "./IFee.sol";
 import "./IFeeManager.sol";
+import "hardhat/console.sol";
 
 /// @title FeeManager Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -129,28 +130,37 @@ contract FeeManager is IFeeManager, ExtensionBase, PermissionedVaultActionMixin 
         address _vaultProxy,
         bytes calldata _configData
     ) external override onlyFundDeployer {
+        console.log("FeeManager:setConfigForFund:sender  %s", msg.sender);
+
         __setValidatedVaultProxy(_comptrollerProxy, _vaultProxy);
+
+        console.log("FeeManager:setConfigForFund:__setValidatedVaultProxy");
 
         (address[] memory fees, bytes[] memory settingsData) = abi.decode(
             _configData,
             (address[], bytes[])
         );
 
+        console.log("FeeManager:setConfigForFund:settingsData");
         // Sanity checks
         require(
             fees.length == settingsData.length,
             "setConfigForFund: fees and settingsData array lengths unequal"
         );
+        console.log("FeeManager:setConfigForFund:first require");
+
         require(fees.isUniqueSet(), "setConfigForFund: fees cannot include duplicates");
 
+        console.log("FeeManager:setConfigForFund:second require");
         // Enable each fee with settings
         for (uint256 i; i < fees.length; i++) {
+            console.log("FeeManager:setConfigForFund:loop: %d", i);
             // Set fund config on fee
             IFee(fees[i]).addFundSettings(_comptrollerProxy, settingsData[i]);
-
+            console.log("FeeManager:setConfigForFund:addFundSettings");
             // Enable fee for fund
             comptrollerProxyToFees[_comptrollerProxy].push(fees[i]);
-
+            console.log("FeeManager:setConfigForFund:comptrollerProxyToFees");
             emit FeeEnabledForFund(_comptrollerProxy, fees[i], settingsData[i]);
         }
     }

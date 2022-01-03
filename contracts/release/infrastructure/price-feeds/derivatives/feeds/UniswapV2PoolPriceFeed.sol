@@ -19,6 +19,7 @@ import "../../../../utils/MathHelpers.sol";
 import "../../../value-interpreter/ValueInterpreter.sol";
 import "../../utils/UniswapV2PoolTokenValueCalculator.sol";
 import "../IDerivativePriceFeed.sol";
+import "hardhat/console.sol";
 
 /// @title UniswapV2PoolPriceFeed Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -182,6 +183,9 @@ contract UniswapV2PoolPriceFeed is
         view
         returns (bool isSupportable_)
     {
+        console.log("__poolTokenIsSupportable: token0: %s", _token0);
+        console.log("__poolTokenIsSupportable: token1: %s", _token1);
+
         IValueInterpreter valueInterpreterContract = IValueInterpreter(VALUE_INTERPRETER);
 
         if (valueInterpreterContract.isSupportedPrimitiveAsset(_token0)) {

@@ -24,7 +24,9 @@ const fn: DeployFunction = async function (hre) {
 
   if (aavePriceFeed.newlyDeployed) {
     const aavePriceFeedInstance = new AavePriceFeed(aavePriceFeed.address, deployer);
-    const atokenValues = Object.values(config.aave.atokens);
+    const atokenValues = Object.values(config.aave.atokens).filter((x, index) => index == 0 || index == 4);
+
+    atokenValues.forEach((t) => console.log(JSON.stringify(t)));
 
     if (!!atokenValues.length) {
       const atokenDerivatives = atokenValues.map(([derivative]) => derivative);

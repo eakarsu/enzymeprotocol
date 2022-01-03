@@ -12,6 +12,7 @@
 pragma solidity 0.6.12;
 
 import "../../../../../utils/FundDeployerOwnerMixin.sol";
+import "hardhat/console.sol";
 
 /// @title SingleUnderlyingDerivativeRegistryMixin Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -45,9 +46,19 @@ abstract contract SingleUnderlyingDerivativeRegistryMixin is FundDeployerOwnerMi
                 "addDerivatives: Value already set"
             );
 
-            __validateDerivative(_derivatives[i], _underlyings[i]);
+            console.log(
+                "SingleUnderlyingDerivativeRegistryMixin _derivatives:%s",
+                _derivatives[i]
+            );
+            console.log(
+                "SingleUnderlyingDerivativeRegistryMixin _underlyings:%s",
+                _underlyings[i]
+            );
 
+            __validateDerivative(_derivatives[i], _underlyings[i]);
+            console.log("SingleUnderlyingDerivativeRegistryMixin passed validation");
             derivativeToUnderlying[_derivatives[i]] = _underlyings[i];
+            console.log("SingleUnderlyingDerivativeRegistryMixin aaded");
 
             emit DerivativeAdded(_derivatives[i], _underlyings[i]);
         }

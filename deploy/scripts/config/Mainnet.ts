@@ -10,12 +10,11 @@ import { isHomestead } from '../../utils/helpers';
 // Special assets
 const mln = '0xec67005c4E498Ec7f55E092bd1d35cbC47C91892';
 const feeToken = mln;
-const weth = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2';
+const weth = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'; //replace later
 const wrappedNativeAsset = weth;
-
 // WETH is not included as it is auto-included in the chainlink price feed
 const primitives = {
-  aave: '0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9',
+  aave: '0xfaAddC93baf78e89DCf37bA67943E1bE8F37Bb8c',
   adx: '0xade00c28244d5ce17d72e40330b1c318cd12b7c3',
   ant: '0xa117000000f279d81a1d3cc75430faa017fa5a2e',
   bal: '0xba100000625a3754423978a60c9317c58a424e3d',
@@ -27,7 +26,8 @@ const primitives = {
   comp: '0xc00e94Cb662C3520282E6f5717214004A7f26888',
   cro: '0xa0b73e1ff0b80914ab6fe0444e65848c4c34450b',
   crv: '0xd533a949740bb3306d119cc777fa900ba034cd52',
-  dai: '0x6B175474E89094C44Da98b954EedeAC495271d0F',
+  //dai: '0x6B175474E89094C44Da98b954EedeAC495271d0F',//replace with local deployed address
+  dai: '0xA7c59f010700930003b33aB25a7a0679C860f29c',
   enj: '0xf629cbd94d3791c9250152bd8dfbdf380e2a3b9c',
   knc: '0xdefa4e8a7bcba345f687a2f1456f5edd9ce97202',
   kncl: '0xdd974D5C2e2928deA5F71b9825b8b646686BD200',
@@ -153,11 +153,12 @@ const ctokens = {
 const compoundComptroller = '0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B';
 
 const atokens = {
-  aaave: ['0xFFC97d72E13E01096502Cb8Eb52dEe56f74DAD7B', primitives.aave] as [string, string],
+  aaave: ['0x824541fBb4A46ACbB23f95CE6a8D71A25D123854', primitives.aave] as [string, string],
   abal: ['0x272F97b7a56a387aE942350bBC7Df5700f8a4576', primitives.bal] as [string, string],
   abusd: ['0xA361718326c15715591c299427c62086F69923D9', primitives.busd] as [string, string],
   acrv: ['0x8dAE6Cb04688C62d939ed9B68d32Bc62e49970b1', primitives.crv] as [string, string],
-  adai: ['0x028171bCA77440897B824Ca71D1c56caC55b68A3', primitives.dai] as [string, string],
+  //adai: ['0x028171bCA77440897B824Ca71D1c56caC55b68A3', primitives.dai] as [string, string], //replace address this also
+  adai: ['0x76F2899A27AE3cA8A14D2D5757065B31C6C5db4b', primitives.dai] as [string, string],
   aenj: ['0xaC6Df26a590F08dcC95D5a4705ae8abbc88509Ef', primitives.enj] as [string, string],
   aknc: ['0x39C6b3e42d6A679d7D776778Fe880BC9487C2EDA', primitives.kncl] as [string, string],
   alink: ['0xa06bC25B5805d5F8d82847D191Cb4Af5A3e873E0', primitives.link] as [string, string],
@@ -228,15 +229,19 @@ const unsupportedAssets = {
   eurs: '0xdb25f211ab05b1c97d595516f45794528a807ad8',
 };
 
-const ethUsdAggregator = '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419';
+const ethUsdAggregator = '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419'; //replace with local deployed address
 
 // prettier-ignore
 const mainnetConfig: DeploymentConfig = {
   aave: {
     atokens,
-    lendingPoolAddressProvider: '0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5',
-    protocolDataProvider: '0x057835Ad21a177dbdd3090bB1CAE03EaCF78Fc6d',
+    //lendingPoolAddressProvider: '0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5',
+    //protocolDataProvider: '0x057835Ad21a177dbdd3090bB1CAE03EaCF78Fc6d',
+
+    lendingPoolAddressProvider: '0x4bf010f1b9beDA5450a8dD702ED602A104ff65EE',
+    protocolDataProvider: '0x0Dd99d9f56A14E9D53b2DdC62D9f0bAbe806647A',
   },
+  
   chainlink: {
     aggregators,
     ethusd: ethUsdAggregator,

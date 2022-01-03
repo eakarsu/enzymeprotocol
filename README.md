@@ -81,3 +81,26 @@ blockNumber: 13619920, // Nov 15, 2021
 url: "https://eth-mainnet.alchemyapi.io/v2/4gZBZgXw-GGmzJF3R6FTJvXKNK_XDTJn",
 },
 },
+
+We need to update coin addresses in mainnet.ts file. For example for aave token and atoke. We need to update lending Smart contract and aave data provider
+address like this in this file:
+
+const atokens = {
+aaave: ['0x3642fd8F149664b0B4D492C95bc62aC61a39be7A', primitives.aave] as [string, string],
+
+const primitives = {
+aave: '0x07882Ae1ecB7429a84f1D53048d35c4bB2056877',
+
+const mainnetConfig: DeploymentConfig = {
+aave: {
+atokens,
+//lendingPoolAddressProvider: '0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5',
+//protocolDataProvider: '0x057835Ad21a177dbdd3090bB1CAE03EaCF78Fc6d',
+
+    lendingPoolAddressProvider: '0x68cec0B81d0D21F51415aCa93F24E64bC0406a75',
+    protocolDataProvider: '0x0a17FabeA4633ce714F1Fa4a2dcA62C3bAc4758d',
+
+},
+rm -fr deployments/ artifacts/ cache/
+
+find deployments/localhost/ -name \*json -print | grep -v "dbg.json" | xargs -i -t cp {} ~/ProsperityFinance/erol-enzyme-aave-fork-protocol/src/abis/

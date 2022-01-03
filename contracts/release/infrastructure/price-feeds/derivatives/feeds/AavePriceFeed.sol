@@ -13,6 +13,7 @@ pragma solidity 0.6.12;
 
 import "../../../../interfaces/IAaveProtocolDataProvider.sol";
 import "./utils/PeggedDerivativesPriceFeedBase.sol";
+import "hardhat/console.sol";
 
 /// @title AavePriceFeed Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -24,6 +25,7 @@ contract AavePriceFeed is PeggedDerivativesPriceFeedBase {
         public
         PeggedDerivativesPriceFeedBase(_fundDeployer)
     {
+        console.log("AavePriceFeed constructor _protocolDataProvider:%s", _protocolDataProvider);
         PROTOCOL_DATA_PROVIDER = _protocolDataProvider;
     }
 
@@ -33,6 +35,8 @@ contract AavePriceFeed is PeggedDerivativesPriceFeedBase {
         (address aTokenAddress, , ) = IAaveProtocolDataProvider(PROTOCOL_DATA_PROVIDER)
             .getReserveTokensAddresses(_underlying);
 
+        console.log("__validateDerivative:aTokenAddress:%s", aTokenAddress);
+        console.log("__validateDerivative:_derivative:%s", _derivative);
         require(
             aTokenAddress == _derivative,
             "__validateDerivative: Invalid aToken or token provided"

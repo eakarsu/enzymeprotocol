@@ -1,6 +1,7 @@
 import type { FundDeployerArgs } from '@enzymefinance/protocol';
 import { constants } from 'ethers';
 import type { DeployFunction } from 'hardhat-deploy/types';
+//const {deployments} = require('hardhat');
 
 const fn: DeployFunction = async function (hre) {
   const {
@@ -18,6 +19,8 @@ const fn: DeployFunction = async function (hre) {
     log: true,
     skipIfAlreadyDeployed: true,
   });
+  //const FundDeployer = await deployments.get("FundDeployer");
+  //console.log ("FundDeployer Address:"+FundDeployer.address);
 };
 
 fn.tags = ['Release', 'FundDeployer'];

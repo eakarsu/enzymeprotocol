@@ -44,8 +44,12 @@ fn.tags = ['Release', 'UniswapV2PoolPriceFeed'];
 fn.dependencies = ['Config', 'FundDeployer', 'ValueInterpreter'];
 fn.skip = async (hre) => {
   const chain = await hre.getChainId();
+  const result = !isOneOfNetworks(chain, [Network.HOMESTEAD]);
+  if (result) {
+    console.log('Ignoring UniswapV2PoolPriceFeed deployment now');
+  }
 
-  return !isOneOfNetworks(chain, [Network.HOMESTEAD]);
+  return true;
 };
 
 export default fn;

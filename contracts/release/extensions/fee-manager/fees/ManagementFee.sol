@@ -17,6 +17,7 @@ import "../../../core/fund/vault/VaultLib.sol";
 import "../../../utils/MakerDaoMath.sol";
 import "./utils/FeeBase.sol";
 import "./utils/UpdatableFeeRecipientBase.sol";
+import "hardhat/console.sol";
 
 /// @title ManagementFee Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -73,24 +74,33 @@ contract ManagementFee is FeeBase, UpdatableFeeRecipientBase, MakerDaoMath {
         override
         onlyFeeManager
     {
+        console.log("ManagementFee:addFundSettings");
         (uint128 scaledPerSecondRate, address recipient) = abi.decode(
             _settingsData,
             (uint128, address)
         );
+        console.log("ManagementFee:addFundSettings:scaledPerSecondRate:%d", scaledPerSecondRate);
+        console.log("ManagementFee:addFundSettings:recipient:%s", recipient);
+
         require(
             scaledPerSecondRate > 0,
             "addFundSettings: scaledPerSecondRate must be greater than 0"
         );
+        console.log("ManagementFee:addFundSettings:after require");
 
         comptrollerProxyToFeeInfo[_comptrollerProxy] = FeeInfo({
             scaledPerSecondRate: scaledPerSecondRate,
             lastSettled: 0
         });
+        console.log("ManagementFee:addFundSettings:comptrollerProxyToFeeInfo");
 
         emit FundSettingsAdded(_comptrollerProxy, scaledPerSecondRate);
+        console.log("ManagementFee:addFundSettings:FundSettingsAdded");
 
         if (recipient != address(0)) {
+            console.log("ManagementFee:addFundSettings:__setRecipientForFund begin");
             __setRecipientForFund(_comptrollerProxy, recipient);
+            console.log("ManagementFee:addFundSettings:__setRecipientForFund end");
         }
     }
 

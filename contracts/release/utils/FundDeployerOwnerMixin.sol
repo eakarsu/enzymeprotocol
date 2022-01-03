@@ -12,6 +12,7 @@
 pragma solidity 0.6.12;
 
 import "../core/fund-deployer/IFundDeployer.sol";
+import "hardhat/console.sol";
 
 /// @title FundDeployerOwnerMixin Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -45,6 +46,7 @@ abstract contract FundDeployerOwnerMixin {
     /// @notice Gets the `FUND_DEPLOYER` variable
     /// @return fundDeployer_ The `FUND_DEPLOYER` variable value
     function getFundDeployer() public view returns (address fundDeployer_) {
+        console.log("FundDeployerOwnerMixin:getFundDeployer:%s", FUND_DEPLOYER);
         return FUND_DEPLOYER;
     }
 }

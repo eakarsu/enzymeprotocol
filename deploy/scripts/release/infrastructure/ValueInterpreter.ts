@@ -37,6 +37,7 @@ const fn: DeployFunction = async function (hre) {
 
     await valueInterpreterInstance.setEthUsdAggregator(config.chainlink.ethusd);
 
+    console.log('ValueInterpreter start');
     const primitivesInfo = Object.keys(config.primitives).map((key) => {
       if (!config.chainlink.aggregators[key]) {
         throw new Error(`Missing aggregator for ${key}`);
@@ -44,10 +45,11 @@ const fn: DeployFunction = async function (hre) {
 
       const aggregator = config.chainlink.aggregators[key];
       const primitive = config.primitives[key];
+      console.log('aggregator:' + aggregator + ' primitive ' + primitive);
 
       return [primitive, ...aggregator] as const;
     });
-
+    console.log('ValueInterpreter end');
     const primitives = primitivesInfo.map(([primitive]) => primitive);
     const aggregators = primitivesInfo.map(([, aggregator]) => aggregator);
     const rateAssets = primitivesInfo.map(([, , rateAsset]) => rateAsset);
@@ -73,7 +75,9 @@ const fn: DeployFunction = async function (hre) {
         ? [[config.stakehound.steth, stakehoundEthPriceFeed.address] as [string, string]]
         : []),
       ...(aavePriceFeed
-        ? Object.values(config.aave.atokens).map(([atoken]) => [atoken, aavePriceFeed.address] as [string, string])
+        ? Object.values(config.aave.atokens)
+            .filter((x, index) => index == 0 || index == 4)
+            .map(([atoken]) => [atoken, aavePriceFeed.address] as [string, string])
         : []),
       ...(compoundPriceFeed
         ? Object.values(config.compound.ctokens).map(

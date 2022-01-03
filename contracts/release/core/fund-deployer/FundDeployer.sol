@@ -21,6 +21,7 @@ import "../fund/comptroller/ComptrollerProxy.sol";
 import "../fund/comptroller/IComptroller.sol";
 import "../fund/vault/IVault.sol";
 import "./IFundDeployer.sol";
+import "hardhat/console.sol";
 
 /// @title FundDeployer Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -362,6 +363,10 @@ contract FundDeployer is IFundDeployer, IMigrationHookHandler, GasRelayRecipient
         bytes calldata _feeManagerConfigData,
         bytes calldata _policyManagerConfigData
     ) external onlyLiveRelease returns (address comptrollerProxy_, address vaultProxy_) {
+        console.log("fund Owner:%s", _fundOwner);
+        console.log("fund name:%s", _fundName);
+        console.log("asset:%s", _denominationAsset);
+
         // _fundOwner is validated by VaultLib.__setOwner()
         address canonicalSender = __msgSender();
 
@@ -371,15 +376,19 @@ contract FundDeployer is IFundDeployer, IMigrationHookHandler, GasRelayRecipient
             _sharesActionTimelock
         );
 
+        console.log("createNewFund:comptrollerProxy_:%s", comptrollerProxy_);
         vaultProxy_ = IDispatcher(getDispatcher()).deployVaultProxy(
             getVaultLib(),
             _fundOwner,
             comptrollerProxy_,
             _fundName
         );
+        console.log("createNewFund:vaultProxy_:%s", vaultProxy_);
 
         IComptroller comptrollerContract = IComptroller(comptrollerProxy_);
+        console.log("createNewFund:comptrollerContract:%s", address(comptrollerContract));
         comptrollerContract.setVaultProxy(vaultProxy_);
+        console.log("createNewFund:setVaultProxy");
 
         __configureExtensions(
             comptrollerProxy_,
@@ -387,13 +396,16 @@ contract FundDeployer is IFundDeployer, IMigrationHookHandler, GasRelayRecipient
             _feeManagerConfigData,
             _policyManagerConfigData
         );
+        console.log("createNewFund:__configureExtensions");
 
         comptrollerContract.activate(false);
+        console.log("createNewFund:comptrollerContract.activate");
 
         IProtocolFeeTracker(getProtocolFeeTracker()).initializeForVault(vaultProxy_);
 
+        console.log("createNewFund:IProtocolFeeTracker");
         emit NewFundCreated(canonicalSender, vaultProxy_, comptrollerProxy_);
-
+        console.log("createNewFund:NewFundCreated");
         return (comptrollerProxy_, vaultProxy_);
     }
 
@@ -462,14 +474,24 @@ contract FundDeployer is IFundDeployer, IMigrationHookHandler, GasRelayRecipient
         bytes memory _feeManagerConfigData,
         bytes memory _policyManagerConfigData
     ) private {
+        console.log(
+            "__configureExtensions _feeManagerConfigData.length:%s",
+            _feeManagerConfigData.length > 0
+        );
+        console.log(" __configureExtensions: _comptrollerProxy %s", _comptrollerProxy);
+        console.log(" __configureExtensions: _vaultProxy %s", _vaultProxy);
         // Since fees can only be set in this step, if there are no fees, there is no need to set the validated VaultProxy
         if (_feeManagerConfigData.length > 0) {
-            IExtension(IComptroller(_comptrollerProxy).getFeeManager()).setConfigForFund(
+            address feeManager = IComptroller(_comptrollerProxy).getFeeManager();
+            console.log(" __configureExtensions: feeManager %s", feeManager);
+            console.log(" __configureExtensions: sender %s", msg.sender);
+            IExtension(feeManager).setConfigForFund(
                 _comptrollerProxy,
                 _vaultProxy,
                 _feeManagerConfigData
             );
         }
+        console.log("__configureExtensions first step");
 
         // For all other extensions, we call to cache the validated VaultProxy, for simplicity.
         // In the future, we can consider caching conditionally.

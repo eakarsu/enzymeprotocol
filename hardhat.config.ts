@@ -1,5 +1,7 @@
 import 'dotenv/config';
 import '@enzymefinance/hardhat/plugin';
+import '@tenderly/hardhat-tenderly';
+import 'solidity-coverage';
 
 import { utils } from 'ethers';
 import type { HardhatUserConfig } from 'hardhat/types';
@@ -32,7 +34,8 @@ const gas = 12450000 * (coverage ? 2 : 1);
 
 const config: HardhatUserConfig = {
   codeCoverage: {
-    exclude: ['/mock/i'], // Ignore anything with the word "mock" in it.
+    //exclude: ['/mock/i'], // Ignore anything with the word "mock" in it.
+    exclude: ['/Uniswap/'],
   },
   codeGenerator: {
     abi: {
@@ -162,6 +165,10 @@ const config: HardhatUserConfig = {
         version: '0.6.12',
       },
     ],
+  },
+  tenderly: {
+    project: 'prosperity',
+    username: 'eakarsu',
   },
 };
 
