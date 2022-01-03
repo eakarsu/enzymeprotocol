@@ -140,6 +140,10 @@ contract FeeManager is IFeeManager, ExtensionBase, PermissionedVaultActionMixin 
             _configData,
             (address[], bytes[])
         );
+        for (uint256 i; i < fees.length; i++) {
+            console.log("FeeManager:setConfigForFund:fees: %s", fees[i]);
+            console.logBytes(settingsData[i]);
+        }
 
         console.log("FeeManager:setConfigForFund:settingsData");
         // Sanity checks

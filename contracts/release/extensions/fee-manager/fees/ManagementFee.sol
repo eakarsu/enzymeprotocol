@@ -75,6 +75,7 @@ contract ManagementFee is FeeBase, UpdatableFeeRecipientBase, MakerDaoMath {
         onlyFeeManager
     {
         console.log("ManagementFee:addFundSettings");
+        console.logBytes(_settingsData);
         (uint128 scaledPerSecondRate, address recipient) = abi.decode(
             _settingsData,
             (uint128, address)

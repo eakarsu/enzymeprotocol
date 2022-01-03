@@ -19,6 +19,7 @@ import "../../../core/fund/comptroller/ComptrollerLib.sol";
 import "../FeeManager.sol";
 import "./utils/FeeBase.sol";
 import "./utils/UpdatableFeeRecipientBase.sol";
+import "hardhat/console.sol";
 
 /// @title PerformanceFee Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -101,15 +102,22 @@ contract PerformanceFee is FeeBase, UpdatableFeeRecipientBase {
         override
         onlyFeeManager
     {
+        console.log("PerformaceFee:addFundSettings:begin");
+        console.logBytes(_settingsData);
         (uint16 feeRate, uint64 feePeriod, address recipient) = abi.decode(
             _settingsData,
             (uint16, uint64, address)
         );
+        console.log("PerformaceFee:addFundSettings:feeRate:%d", feeRate);
+        console.log("PerformaceFee:addFundSettings:feePeriod:%d", feePeriod);
+        console.log("PerformaceFee:addFundSettings:recipient:%s", recipient);
+
         require(feeRate > 0, "addFundSettings: feeRate must be greater than 0");
         // Unlike most other fees, there could be a case for using a rate of exactly 100%,
         // i.e., pay out all profits to a specified recipient
         require(feeRate <= ONE_HUNDRED_PERCENT, "addFundSettings: feeRate max exceeded");
         require(feePeriod > 0, "addFundSettings: feePeriod must be greater than 0");
+        console.log("PerformaceFee:addFundSettings afre requires");
 
         comptrollerProxyToFeeInfo[_comptrollerProxy] = FeeInfo({
             rate: feeRate,
@@ -120,8 +128,10 @@ contract PerformanceFee is FeeBase, UpdatableFeeRecipientBase {
             lastSharePrice: 0,
             aggregateValueDue: 0
         });
+        console.log("PerformaceFee:addFundSettings after comptrollerProxyToFeeInfo");
 
         emit FundSettingsAdded(_comptrollerProxy, feeRate, feePeriod);
+        console.log("PerformaceFee:addFundSettings after FundSettingsAdded");
 
         if (recipient != address(0)) {
             __setRecipientForFund(_comptrollerProxy, recipient);

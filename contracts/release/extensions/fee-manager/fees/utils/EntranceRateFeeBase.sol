@@ -13,6 +13,7 @@ pragma solidity 0.6.12;
 
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "./FeeBase.sol";
+import "hardhat/console.sol";
 
 /// @title EntranceRateFeeBase Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -52,13 +53,18 @@ abstract contract EntranceRateFeeBase is FeeBase {
         override
         onlyFeeManager
     {
+        console.log("EntraceRateFeeBase begin");
         uint256 rate = abi.decode(_settingsData, (uint256));
+        console.log("EntraceRateFeeBase rate:%d", rate);
         require(rate > 0, "addFundSettings: Fee rate must be >0");
         require(rate < ONE_HUNDRED_PERCENT, "addFundSettings: Fee rate max exceeded");
+        console.log("EntraceRateFeeBase after requires _comptrollerProxy:%s", _comptrollerProxy);
 
         comptrollerProxyToRate[_comptrollerProxy] = rate;
 
+        console.log("EntraceRateFeeBase after comptrollerProxyToRate");
         emit FundSettingsAdded(_comptrollerProxy, rate);
+        console.log("EntraceRateFeeBase after FundSettingsAdded");
     }
 
     /// @notice Settles the fee

@@ -405,7 +405,8 @@ contract FundDeployer is IFundDeployer, IMigrationHookHandler, GasRelayRecipient
 
         console.log("createNewFund:IProtocolFeeTracker");
         emit NewFundCreated(canonicalSender, vaultProxy_, comptrollerProxy_);
-        console.log("createNewFund:NewFundCreated");
+        console.log("createNewFund:NewFundCreated:comptrollerProxy_:%s", comptrollerProxy_);
+        console.log("createNewFund:NewFundCreated:vaultProxy_:%s", vaultProxy_);
         return (comptrollerProxy_, vaultProxy_);
     }
 
