@@ -35,6 +35,8 @@ fn.tags = ['Release', 'Adapters', 'AaveAdapter'];
 fn.dependencies = ['Config', 'IntegrationManager', 'AavePriceFeed'];
 fn.skip = async (hre) => {
   const chain = await hre.getChainId();
+  console.log('chain:' + chain + ':' + Network.HOMESTEAD);
+  console.log('ddddd:' + isOneOfNetworks(chain, [Network.HOMESTEAD]));
 
   return !isOneOfNetworks(chain, [Network.HOMESTEAD]);
 };

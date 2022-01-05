@@ -13,6 +13,7 @@ pragma solidity 0.6.12;
 
 import "../../utils/FundDeployerOwnerMixin.sol";
 import "../IExtension.sol";
+import "hardhat/console.sol";
 
 /// @title ExtensionBase Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -26,6 +27,7 @@ abstract contract ExtensionBase is IExtension, FundDeployerOwnerMixin {
     mapping(address => address) internal comptrollerProxyToVaultProxy;
 
     modifier onlyFundDeployer() {
+        console.log("ExtensionBase:onlyFundDeployer:msg.sender: %s", msg.sender);
         require(msg.sender == getFundDeployer(), "Only the FundDeployer can make this call");
         _;
     }
