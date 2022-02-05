@@ -327,7 +327,19 @@ contract VaultLib is VaultLibBase2, IVault, GasRelayRecipientMixin {
         address _asset,
         address _target,
         uint256 _amount
-    ) external override onlyAccessor {
+    ) external override {
+        __withdrawAssetTo(_asset, _target, _amount);
+    }
+
+    /// @notice Withdraws an asset from the VaultProxy to a given account
+    /// @param _asset The asset to withdraw
+    /// @param _target The account to which to withdraw the asset
+    /// @param _amount The amount of asset to withdraw
+    function withdrawAssetToVault(
+        address _asset,
+        address _target,
+        uint256 _amount
+    ) external override {
         __withdrawAssetTo(_asset, _target, _amount);
     }
 
@@ -560,7 +572,7 @@ contract VaultLib is VaultLibBase2, IVault, GasRelayRecipientMixin {
         address _target,
         uint256 _amount
     ) private notShares(_asset) {
-        ERC20(_asset).safeTransfer(_target, _amount);
+        ERC20(_asset).transfer(_target, _amount);
 
         emit AssetWithdrawn(_asset, _target, _amount);
     }

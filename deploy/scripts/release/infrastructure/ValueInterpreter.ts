@@ -53,9 +53,11 @@ const fn: DeployFunction = async function (hre) {
     const primitives = primitivesInfo.map(([primitive]) => primitive);
     const aggregators = primitivesInfo.map(([, aggregator]) => aggregator);
     const rateAssets = primitivesInfo.map(([, , rateAsset]) => rateAsset);
+    console.log('ValueInterpreter primitivesInfo');
 
     await valueInterpreterInstance.addPrimitives(primitives, aggregators, rateAssets);
 
+    console.log('ValueInterpreter valueInterpreterInstance addPrimitives ');
     // Add AggregatedDerivativePriceFeedMixin config
 
     const aavePriceFeed = await getOrNull('AavePriceFeed');
@@ -68,6 +70,8 @@ const fn: DeployFunction = async function (hre) {
     const synthetixPriceFeed = await getOrNull('SynthetixPriceFeed');
     const yearnVaultV2PriceFeed = await getOrNull('YearnVaultV2PriceFeed');
 
+    console.log('ValueInterpreter yearnVaultV2PriceFeed ');
+
     const derivativePairs: [string, string][] = [
       ...(compoundPriceFeed ? [[config.compound.ceth, compoundPriceFeed.address] as [string, string]] : []),
       ...(lidoStethPriceFeed ? [[config.lido.steth, lidoStethPriceFeed.address] as [string, string]] : []),
@@ -76,7 +80,7 @@ const fn: DeployFunction = async function (hre) {
         : []),
       ...(aavePriceFeed
         ? Object.values(config.aave.atokens)
-            .filter((x, index) => index == 0 || index == 4)
+            .filter((x, index) => index == 0 || index == 4 || index == 5)
             .map(([atoken]) => [atoken, aavePriceFeed.address] as [string, string])
         : []),
       ...(compoundPriceFeed
@@ -110,10 +114,13 @@ const fn: DeployFunction = async function (hre) {
         : []),
     ];
 
+    console.log('ValueInterpreter derivativePairs ');
     const derivatives = derivativePairs.map(([derivative]) => derivative);
     const derivativeFeeds = derivativePairs.map(([, feed]) => feed);
     if (derivatives.length && derivativeFeeds.length) {
+      console.log('ValueInterpreter addDerivatives before ');
       await valueInterpreterInstance.addDerivatives(derivatives, derivativeFeeds);
+      console.log('ValueInterpreter addDerivatives after ');
     }
   }
 };

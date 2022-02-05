@@ -14,7 +14,7 @@ const weth = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'; //replace later
 const wrappedNativeAsset = weth;
 // WETH is not included as it is auto-included in the chainlink price feed
 const primitives = {
-  aave: '0xfaAddC93baf78e89DCf37bA67943E1bE8F37Bb8c',
+  aave: '0x6F6f570F45833E249e27022648a26F4076F48f78',
   adx: '0xade00c28244d5ce17d72e40330b1c318cd12b7c3',
   ant: '0xa117000000f279d81a1d3cc75430faa017fa5a2e',
   bal: '0xba100000625a3754423978a60c9317c58a424e3d',
@@ -22,13 +22,13 @@ const primitives = {
   bnb: '0xB8c77482e45F1F44dE1745F52C74426C631bDD52',
   bnt: '0x1f573d6fb3f13d689ff844b4ce37794d79a7ff1c',
   busd: '0x4fabb145d64652a948d72533023f6e7a623c7c53',
-  bzrx: '0x56d811088235f11c8920698a204a5010a788f4b3',
+  //bzrx: '0x56d811088235f11c8920698a204a5010a788f4b3',
   comp: '0xc00e94Cb662C3520282E6f5717214004A7f26888',
   cro: '0xa0b73e1ff0b80914ab6fe0444e65848c4c34450b',
   crv: '0xd533a949740bb3306d119cc777fa900ba034cd52',
   //dai: '0x6B175474E89094C44Da98b954EedeAC495271d0F',//replace with local deployed address
-  dai: '0xA7c59f010700930003b33aB25a7a0679C860f29c',
-  enj: '0xf629cbd94d3791c9250152bd8dfbdf380e2a3b9c',
+  dai: '0x99dBE4AEa58E518C50a1c04aE9b48C9F6354612f',
+  enj: '0x40a42Baf86Fc821f972Ad2aC878729063CeEF403',
   knc: '0xdefa4e8a7bcba345f687a2f1456f5edd9ce97202',
   kncl: '0xdd974D5C2e2928deA5F71b9825b8b646686BD200',
   link: '0x514910771af9ca656af840dff83e8264ecf986ca',
@@ -63,7 +63,7 @@ const aggregators = {
   bnb: ['0x14e613ac84a31f709eadbdf89c6cc390fdc9540a', ChainlinkRateAsset.USD],
   bnt: ['0xcf61d1841b178fe82c8895fe60c2edda08314416', ChainlinkRateAsset.ETH],
   busd: ['0x614715d2af89e6ec99a233818275142ce88d1cfd', ChainlinkRateAsset.ETH],
-  bzrx: ['0x8f7c7181ed1a2ba41cfc3f5d064ef91b67daef66', ChainlinkRateAsset.ETH],
+  //bzrx: ['0x8f7c7181ed1a2ba41cfc3f5d064ef91b67daef66', ChainlinkRateAsset.ETH],
   comp: ['0x1b39ee86ec5979ba5c322b826b3ecb8c79991699', ChainlinkRateAsset.ETH],
   cro: ['0xcA696a9Eb93b81ADFE6435759A29aB4cf2991A96', ChainlinkRateAsset.ETH],
   crv: ['0x8a12be339b0cd1829b91adc01977caa5e9ac121e', ChainlinkRateAsset.ETH],
@@ -153,13 +153,13 @@ const ctokens = {
 const compoundComptroller = '0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B';
 
 const atokens = {
-  aaave: ['0x824541fBb4A46ACbB23f95CE6a8D71A25D123854', primitives.aave] as [string, string],
+  aaave: ['0x52E059A345403DD02940A95634f2f344647013bF', primitives.aave] as [string, string],
   abal: ['0x272F97b7a56a387aE942350bBC7Df5700f8a4576', primitives.bal] as [string, string],
   abusd: ['0xA361718326c15715591c299427c62086F69923D9', primitives.busd] as [string, string],
   acrv: ['0x8dAE6Cb04688C62d939ed9B68d32Bc62e49970b1', primitives.crv] as [string, string],
   //adai: ['0x028171bCA77440897B824Ca71D1c56caC55b68A3', primitives.dai] as [string, string], //replace address this also
-  adai: ['0x76F2899A27AE3cA8A14D2D5757065B31C6C5db4b', primitives.dai] as [string, string],
-  aenj: ['0xaC6Df26a590F08dcC95D5a4705ae8abbc88509Ef', primitives.enj] as [string, string],
+  adai: ['0x281c019bc4686864E8486d1194A81D03a5ba1717', primitives.dai] as [string, string],
+  aenj: ['0x093FF4b3Dc0351a15E33f54707BE8A7E1027A6Cc', primitives.enj] as [string, string],
   aknc: ['0x39C6b3e42d6A679d7D776778Fe880BC9487C2EDA', primitives.kncl] as [string, string],
   alink: ['0xa06bC25B5805d5F8d82847D191Cb4Af5A3e873E0', primitives.link] as [string, string],
   amana: ['0xa685a61171bb30d4072B338c80Cb7b2c865c873E', primitives.mana] as [string, string],
@@ -185,7 +185,7 @@ const pools = {
   bntWeth: '0x3fd4cf9303c4bc9e13772618828712c8eac7dd2f',
   busdUsdc: '0x524847c615639e76fe7d0fe0b16be8c4eac9cf3c',
   busdUsdt: '0xa0abda1f980e03d7eadb78aed8fc1f2dd0fe83dd',
-  bzrxWeth: '0xb9b752f7f4a4680eeb327ffe728f46666763a796',
+  //bzrxWeth: '0xb9b752f7f4a4680eeb327ffe728f46666763a796',
   compWeth: '0xcffdded873554f362ac02f8fb1f02e5ada10516f',
   croWeth: '0x90704ac59e7e54632b0cc9d22573aecd7eb094ad',
   crvWeth: '0x3da1313ae46132a397d90d95b1424a9a7e3e0fce',
@@ -238,8 +238,8 @@ const mainnetConfig: DeploymentConfig = {
     //lendingPoolAddressProvider: '0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5',
     //protocolDataProvider: '0x057835Ad21a177dbdd3090bB1CAE03EaCF78Fc6d',
 
-    lendingPoolAddressProvider: '0x4bf010f1b9beDA5450a8dD702ED602A104ff65EE',
-    protocolDataProvider: '0x0Dd99d9f56A14E9D53b2DdC62D9f0bAbe806647A',
+    lendingPoolAddressProvider: '0xB06c856C8eaBd1d8321b687E188204C1018BC4E5',
+    protocolDataProvider: '0xf5c4a909455C00B99A90d93b48736F3196DB5621',
   },
   
   chainlink: {

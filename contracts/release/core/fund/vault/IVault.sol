@@ -82,4 +82,10 @@ interface IVault is IMigratableVault, IFreelyTransferableSharesVault, IExternalP
         address,
         uint256
     ) external;
+
+    function withdrawAssetToVault(
+        address,
+        address,
+        uint256
+    ) external;
 }

@@ -18,6 +18,7 @@ import "../core/fund/vault/VaultLib.sol";
 import "../extensions/fee-manager/FeeManager.sol";
 import "../infrastructure/protocol-fees/ProtocolFeeTracker.sol";
 import "../infrastructure/value-interpreter/ValueInterpreter.sol";
+import "hardhat/console.sol";
 
 /// @title FundValueCalculator Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -253,11 +254,16 @@ contract FundValueCalculator is IFundValueCalculator {
     {
         // Does not account for any new shares accrued to the _sharesHolder during calcs
         uint256 sharesHolderBalance = ERC20(_vaultProxy).balanceOf(_sharesHolder);
+        console.log("calcNetValueForSharesHolder:sharesHolderBalance:%d", sharesHolderBalance);
 
         uint256 netShareValue;
         (denominationAsset_, netShareValue) = calcNetShareValue(_vaultProxy);
+        console.log("calcNetValueForSharesHolder:denominationAsset_:%s", denominationAsset_);
+        console.log("calcNetValueForSharesHolder:netShareValue:%d", netShareValue);
 
         netValue_ = sharesHolderBalance.mul(netShareValue).div(SHARES_UNIT);
+
+        console.log("calcNetValueForSharesHolder:netValue_:%d", netValue_);
 
         return (denominationAsset_, netValue_);
     }

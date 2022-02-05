@@ -14,6 +14,7 @@ pragma solidity 0.6.12;
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "../../../interfaces/IChainlinkAggregator.sol";
+import "hardhat/console.sol";
 
 /// @title ChainlinkPriceFeedMixin Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -260,15 +261,18 @@ abstract contract ChainlinkPriceFeedMixin {
                 "__addPrimitives: Value already set"
             );
 
+            console.log("before __validateAggregator:%s", _aggregators[i]);
             __validateAggregator(_aggregators[i]);
+            console.log("after __validateAggregator:%s", _aggregators[i]);
 
             primitiveToAggregatorInfo[_primitives[i]] = AggregatorInfo({
                 aggregator: _aggregators[i],
                 rateAsset: _rateAssets[i]
             });
-
+            console.log("after __validateAggregator AggregatorInfo :%s", _aggregators[i]);
             // Store the amount that makes up 1 unit given the asset's decimals
             uint256 unit = 10**uint256(ERC20(_primitives[i]).decimals());
+            console.log("after __validateAggregator ERC20 :%s", _aggregators[i]);
             primitiveToUnit[_primitives[i]] = unit;
 
             emit PrimitiveAdded(_primitives[i], _aggregators[i], _rateAssets[i], unit);
