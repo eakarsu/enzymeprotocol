@@ -25,4 +25,17 @@ interface IFundDeployer {
         bytes4,
         bytes32
     ) external view returns (bool);
+
+    function createNewFund(
+        address _fundOwner,
+        string calldata _fundName,
+        address _denominationAsset,
+        uint256 _sharesActionTimelock,
+        bytes calldata _feeManagerConfigData,
+        bytes calldata _policyManagerConfigData
+    ) external returns (address, address);
+
+    function getVaultLib() external view returns (address);
+
+    function getComptrollerLib() external view returns (address comptrollerLib_);
 }

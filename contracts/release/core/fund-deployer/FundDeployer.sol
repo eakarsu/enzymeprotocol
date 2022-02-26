@@ -362,7 +362,7 @@ contract FundDeployer is IFundDeployer, IMigrationHookHandler, GasRelayRecipient
         uint256 _sharesActionTimelock,
         bytes calldata _feeManagerConfigData,
         bytes calldata _policyManagerConfigData
-    ) external onlyLiveRelease returns (address comptrollerProxy_, address vaultProxy_) {
+    ) external override onlyLiveRelease returns (address comptrollerProxy_, address vaultProxy_) {
         console.log("fund Owner:%s", _fundOwner);
         console.log("fund name:%s", _fundName);
         console.log("asset:%s", _denominationAsset);
@@ -815,7 +815,7 @@ contract FundDeployer is IFundDeployer, IMigrationHookHandler, GasRelayRecipient
 
     /// @notice Gets the `comptrollerLib` variable value
     /// @return comptrollerLib_ The `comptrollerLib` variable value
-    function getComptrollerLib() public view returns (address comptrollerLib_) {
+    function getComptrollerLib() public view override returns (address comptrollerLib_) {
         return comptrollerLib;
     }
 
@@ -870,7 +870,7 @@ contract FundDeployer is IFundDeployer, IMigrationHookHandler, GasRelayRecipient
 
     /// @notice Gets the `vaultLib` variable value
     /// @return vaultLib_ The `vaultLib` variable value
-    function getVaultLib() public view returns (address vaultLib_) {
+    function getVaultLib() public view override returns (address vaultLib_) {
         return vaultLib;
     }
 
