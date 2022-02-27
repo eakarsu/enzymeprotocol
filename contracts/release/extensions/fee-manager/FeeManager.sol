@@ -135,11 +135,14 @@ contract FeeManager is IFeeManager, ExtensionBase, PermissionedVaultActionMixin 
         __setValidatedVaultProxy(_comptrollerProxy, _vaultProxy);
 
         console.log("FeeManager:setConfigForFund:__setValidatedVaultProxy");
+        console.logBytes(_configData);
 
-        (address[] memory fees, bytes[] memory settingsData) = abi.decode(
+        (address[3] memory fees, bytes[3] memory settingsData) = abi.decode(
             _configData,
-            (address[], bytes[])
+            (address[3], bytes[3])
         );
+        console.log("FeeManager:abi decode");
+
         for (uint256 i; i < fees.length; i++) {
             console.log("FeeManager:setConfigForFund:fees: %s", fees[i]);
             console.logBytes(settingsData[i]);
@@ -153,7 +156,7 @@ contract FeeManager is IFeeManager, ExtensionBase, PermissionedVaultActionMixin 
         );
         console.log("FeeManager:setConfigForFund:first require");
 
-        require(fees.isUniqueSet(), "setConfigForFund: fees cannot include duplicates");
+        //require(fees.isUniqueSet(), "setConfigForFund: fees cannot include duplicates");
 
         console.log("FeeManager:setConfigForFund:second require");
         // Enable each fee with settings

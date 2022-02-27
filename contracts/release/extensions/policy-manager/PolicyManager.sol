@@ -19,6 +19,7 @@ import "../../utils/AddressArrayLib.sol";
 import "../utils/ExtensionBase.sol";
 import "./IPolicy.sol";
 import "./IPolicyManager.sol";
+import "hardhat/console.sol";
 
 /// @title PolicyManager Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -136,17 +137,21 @@ contract PolicyManager is IPolicyManager, ExtensionBase, GasRelayRecipientMixin 
         address _vaultProxy,
         bytes calldata _configData
     ) external override onlyFundDeployer {
+        console.log("policyManager setConfigForFund");
         __setValidatedVaultProxy(_comptrollerProxy, _vaultProxy);
-
-        // In case there are no policies yet
-        if (_configData.length == 0) {
+        console.log("policyManager setConfigForFund __setValidatedVaultProxy");
+        console.logBytes(_configData);
+        // In case the  re are no policies yet
+        if (_configData.length == 0 || _configData.length == 1) {
             return;
         }
+        console.log("policyManager setConfigForFund <> 0");
 
         (address[] memory policies, bytes[] memory settingsData) = abi.decode(
             _configData,
             (address[], bytes[])
         );
+        console.log("policyManager setConfigForFund abi decode");
 
         // Sanity check
         require(

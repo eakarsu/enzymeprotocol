@@ -501,16 +501,19 @@ contract FundDeployer is IFundDeployer, IMigrationHookHandler, GasRelayRecipient
             _vaultProxy,
             ""
         );
+        console.log("__configureExtensions getExternalPositionManager");
         IExtension(IComptroller(_comptrollerProxy).getIntegrationManager()).setConfigForFund(
             _comptrollerProxy,
             _vaultProxy,
             ""
         );
+        console.log("__configureExtensions getIntegrationManager");
         IExtension(IComptroller(_comptrollerProxy).getPolicyManager()).setConfigForFund(
             _comptrollerProxy,
             _vaultProxy,
             _policyManagerConfigData
         );
+        console.log("__configureExtensions getPolicyManager");
     }
 
     /// @dev Helper function to deploy a configured ComptrollerProxy
