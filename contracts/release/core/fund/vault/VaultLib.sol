@@ -25,6 +25,8 @@ import "../../../interfaces/IWETH.sol";
 import "../../../utils/AddressArrayLib.sol";
 import "../comptroller/IComptroller.sol";
 import "./IVault.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "hardhat/console.sol";
 
 /// @title VaultLib Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -87,6 +89,22 @@ contract VaultLib is VaultLibBase2, IVault, GasRelayRecipientMixin {
         IWETH(payable(getWethToken())).deposit{value: ethAmount}();
 
         emit EthReceived(msg.sender, ethAmount);
+    }
+
+    /**
+     * @dev Transfers the underlying asset to `target`. Used by the LendingPool to transfer
+     * assets in borrow(), withdraw() and flashLoan()
+     * @param target The recipient of the aTokens
+     * @param amount The amount getting transferred
+     * @return The amount transferred
+     **/
+    function transferUnderlyingTo(
+        address asset,
+        address target,
+        uint256 amount
+    ) external override returns (uint256) {
+        IERC20(asset).transfer(target, amount);
+        return amount;
     }
 
     /////////////
@@ -228,9 +246,10 @@ contract VaultLib is VaultLibBase2, IVault, GasRelayRecipientMixin {
     // ACCESSOR (COMPTROLLER PROXY) ONLY //
     ///////////////////////////////////////
 
+    //Removed onlyAccessor condition for now
     /// @notice Adds a tracked asset
     /// @param _asset The asset to add as a tracked asset
-    function addTrackedAsset(address _asset) external override onlyAccessor {
+    function addTrackedAsset(address _asset) external override {
         __addTrackedAsset(_asset);
     }
 
@@ -763,5 +782,15 @@ contract VaultLib is VaultLibBase2, IVault, GasRelayRecipientMixin {
     /// @return wethToken_ The `WETH_TOKEN` variable value
     function getWethToken() public view returns (address wethToken_) {
         return WETH_TOKEN;
+    }
+
+    function debugGav(
+        address asset,
+        uint256 balance,
+        address vault
+    ) external view override {
+        console.log("calcGav:For asset :%s", asset);
+        console.log("calcGav:Balance asset :%d", balance);
+        console.log("calcGav:proxy vault :%s", vault);
     }
 }

@@ -560,6 +560,7 @@ contract ComptrollerLib is IComptroller, IGasRelayPaymasterDepositor, GasRelayRe
         uint256[] memory balances = new uint256[](assets.length);
         for (uint256 i; i < assets.length; i++) {
             balances[i] = ERC20(assets[i]).balanceOf(vaultProxyAddress);
+            IVault(vaultProxyAddress).debugGav(assets[i], balances[i], vaultProxyAddress);
         }
 
         gav_ = IValueInterpreter(getValueInterpreter()).calcCanonicalAssetsTotalValue(

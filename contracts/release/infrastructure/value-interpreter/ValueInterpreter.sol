@@ -19,6 +19,7 @@ import "../price-feeds/derivatives/AggregatedDerivativePriceFeedMixin.sol";
 import "../price-feeds/derivatives/IDerivativePriceFeed.sol";
 import "../price-feeds/primitives/ChainlinkPriceFeedMixin.sol";
 import "./IValueInterpreter.sol";
+import "hardhat/console.sol";
 
 /// @title ValueInterpreter Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -73,6 +74,10 @@ contract ValueInterpreter is
         for (uint256 i; i < _baseAssets.length; i++) {
             uint256 assetValue = __calcAssetValue(_baseAssets[i], _amounts[i], _quoteAsset);
             value_ = value_.add(assetValue);
+            console.log("calcCanonicalAssetsTotalValue:base asset : %s", _baseAssets[i]);
+            console.log("calcCanonicalAssetsTotalValue:amount : %d", _amounts[i]);
+            console.log("calcCanonicalAssetsTotalValue:quota asset : %s", _quoteAsset);
+            console.log("calcCanonicalAssetsTotalValue:value : %d", assetValue);
         }
 
         return value_;
