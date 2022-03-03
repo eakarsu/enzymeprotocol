@@ -12,6 +12,7 @@
 pragma solidity 0.6.12;
 
 import "./VaultLibSafeMath.sol";
+import "hardhat/console.sol";
 
 /// @title StandardERC20 Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -25,6 +26,13 @@ abstract contract SharesTokenBase {
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
     event Transfer(address indexed from, address indexed to, uint256 value);
+    /**
+     * @dev Emitted after aTokens are burned
+     * @param from The owner of the aTokens, getting them burned
+     * @param target The address that will receive the underlying
+     * @param value The amount being burned
+     **/
+    event Burn(address indexed from, address indexed target, uint256 value);
 
     string internal sharesName;
     string internal sharesSymbol;
@@ -113,6 +121,10 @@ abstract contract SharesTokenBase {
 
     /// @dev Helper to burn tokens from an account. Can be overridden.
     function __burn(address _account, uint256 _amount) internal virtual {
+        console.log("SharesTokeBase:Burning account:%s", _account);
+        console.log("SharesTokeBase:Burning amount:%s", _amount);
+        console.log("SharesTokeBase:Burning current:%s", sharesBalances[_account]);
+
         require(_account != address(0), "ERC20: burn from the zero address");
 
         sharesBalances[_account] = sharesBalances[_account].sub(

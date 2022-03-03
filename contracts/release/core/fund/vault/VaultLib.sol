@@ -102,7 +102,7 @@ contract VaultLib is VaultLibBase2, IVault, GasRelayRecipientMixin {
         address asset,
         address target,
         uint256 amount
-    ) external override returns (uint256) {
+    ) public override returns (uint256) {
         IERC20(asset).transfer(target, amount);
         return amount;
     }
