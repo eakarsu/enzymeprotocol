@@ -14,7 +14,7 @@ const weth = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'; //replace later
 const wrappedNativeAsset = weth;
 // WETH is not included as it is auto-included in the chainlink price feed
 const primitives = {
-  aave: '0xFD6F7A6a5c21A3f503EBaE7a473639974379c351',
+  aave: '0xa6e99A4ED7498b3cdDCBB61a6A607a4925Faa1B7',
   adx: '0xade00c28244d5ce17d72e40330b1c318cd12b7c3',
   ant: '0xa117000000f279d81a1d3cc75430faa017fa5a2e',
   bal: '0xba100000625a3754423978a60c9317c58a424e3d',
@@ -27,8 +27,8 @@ const primitives = {
   cro: '0xa0b73e1ff0b80914ab6fe0444e65848c4c34450b',
   crv: '0xd533a949740bb3306d119cc777fa900ba034cd52',
   //dai: '0x6B175474E89094C44Da98b954EedeAC495271d0F',//replace with local deployed address
-  dai: '0x6C2d83262fF84cBaDb3e416D527403135D757892',
-  enj: '0xefAB0Beb0A557E452b398035eA964948c750b2Fd',
+  dai: '0xFD6F7A6a5c21A3f503EBaE7a473639974379c351',
+  enj: '0xaca81583840B1bf2dDF6CDe824ada250C1936B4D',
   knc: '0xdefa4e8a7bcba345f687a2f1456f5edd9ce97202',
   kncl: '0xdd974D5C2e2928deA5F71b9825b8b646686BD200',
   link: '0x514910771af9ca656af840dff83e8264ecf986ca',
@@ -153,13 +153,13 @@ const ctokens = {
 const compoundComptroller = '0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B';
 
 const atokens = {
-  aaave: ['0x1D59060F43B912b11B5D9F281678EB102DB7AC1C', primitives.aave] as [string, string],
+  aaave: ['0x9E97b5f8B26cdd83444a56E24598fC39a8c78610', primitives.aave] as [string, string],
   abal: ['0x272F97b7a56a387aE942350bBC7Df5700f8a4576', primitives.bal] as [string, string],
   abusd: ['0xA361718326c15715591c299427c62086F69923D9', primitives.busd] as [string, string],
   acrv: ['0x8dAE6Cb04688C62d939ed9B68d32Bc62e49970b1', primitives.crv] as [string, string],
   //adai: ['0x028171bCA77440897B824Ca71D1c56caC55b68A3', primitives.dai] as [string, string], //replace address this also
-  adai: ['0x68A76207001466bd19F54A39a81B3011e6176eC5', primitives.dai] as [string, string],
-  aenj: ['0x18483FF100715E3ac81373AEFe7d82211592cC17', primitives.enj] as [string, string],
+  adai: ['0x95FA4f12fe261f4c060eB8694627e50Cc20018E2', primitives.dai] as [string, string],
+  aenj: ['0x841a1e557d37320a372fC7F1ec78299C38AC79f9', primitives.enj] as [string, string],
   aknc: ['0x39C6b3e42d6A679d7D776778Fe880BC9487C2EDA', primitives.kncl] as [string, string],
   alink: ['0xa06bC25B5805d5F8d82847D191Cb4Af5A3e873E0', primitives.link] as [string, string],
   amana: ['0xa685a61171bb30d4072B338c80Cb7b2c865c873E', primitives.mana] as [string, string],
@@ -238,8 +238,8 @@ const mainnetConfig: DeploymentConfig = {
     //lendingPoolAddressProvider: '0x8F4ec854Dd12F1fe79500a1f53D0cbB30f9b6134',
     //protocolDataProvider: '0x9c65f85425c619A6cB6D29fF8d57ef696323d188',
 
-    lendingPoolAddressProvider: '0x12Bcb546bC60fF39F1Adfc7cE4605d5Bd6a6A876',
-    protocolDataProvider: '0x0c626FC4A447b01554518550e30600136864640B',
+    lendingPoolAddressProvider: '0xaC47e91215fb80462139756f43438402998E4A3a',
+    protocolDataProvider: '0xA21DDc1f17dF41589BC6A5209292AED2dF61Cc94',
   },
   
   chainlink: {

@@ -793,4 +793,6 @@ contract VaultLib is VaultLibBase2, IVault, GasRelayRecipientMixin {
         console.log("calcGav:Balance asset :%d", balance);
         console.log("calcGav:proxy vault :%s", vault);
     }
+
+    function handleRepayment(address user, uint256 amount) external override {}
 }

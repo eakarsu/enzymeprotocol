@@ -100,4 +100,6 @@ interface IVault is IMigratableVault, IFreelyTransferableSharesVault, IExternalP
         uint256,
         address
     ) external view;
+
+    function handleRepayment(address, uint256) external;
 }
