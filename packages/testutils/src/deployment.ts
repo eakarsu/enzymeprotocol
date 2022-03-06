@@ -209,6 +209,7 @@ export interface DeploymentConfig {
     lendingPoolAddressProvider: string;
     protocolDataProvider: string;
     atokens: Record<string, [string, string]>;
+    atokensIncluded: Array<string>;
   };
   compound: {
     ceth: string;

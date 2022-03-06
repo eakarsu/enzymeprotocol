@@ -79,8 +79,9 @@ const fn: DeployFunction = async function (hre) {
         ? [[config.stakehound.steth, stakehoundEthPriceFeed.address] as [string, string]]
         : []),
       ...(aavePriceFeed
-        ? Object.values(config.aave.atokens)
-            .filter((x, index) => index == 0 || index == 4 || index == 5)
+        ? Object.entries(config.aave.atokens)
+            .filter(([k, []]) => config.aave.atokensIncluded.includes(k))
+            .map(([, [v1, v2]]) => [v1, v2])
             .map(([atoken]) => [atoken, aavePriceFeed.address] as [string, string])
         : []),
       ...(compoundPriceFeed

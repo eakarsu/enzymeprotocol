@@ -10,48 +10,48 @@ import { isHomestead } from '../../utils/helpers';
 // Special assets
 const mln = '0xec67005c4E498Ec7f55E092bd1d35cbC47C91892';
 const feeToken = mln;
-const weth = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'; //replace later
+const weth = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2';
 const wrappedNativeAsset = weth;
+
 // WETH is not included as it is auto-included in the chainlink price feed
 const primitives = {
-  aave: '0xa6e99A4ED7498b3cdDCBB61a6A607a4925Faa1B7',
+  aave: '0x5302E909d1e93e30F05B5D6Eea766363D14F9892',
   adx: '0xade00c28244d5ce17d72e40330b1c318cd12b7c3',
   ant: '0xa117000000f279d81a1d3cc75430faa017fa5a2e',
   bal: '0xba100000625a3754423978a60c9317c58a424e3d',
-  bat: '0x0d8775f648430679a709e98d2b0cb6250d2887ef',
+  bat: '0x4bf010f1b9beDA5450a8dD702ED602A104ff65EE',
   bnb: '0xB8c77482e45F1F44dE1745F52C74426C631bDD52',
   bnt: '0x1f573d6fb3f13d689ff844b4ce37794d79a7ff1c',
-  busd: '0x4fabb145d64652a948d72533023f6e7a623c7c53',
+  busd: '0x8bCe54ff8aB45CB075b044AE117b8fD91F9351aB',
   //bzrx: '0x56d811088235f11c8920698a204a5010a788f4b3',
   comp: '0xc00e94Cb662C3520282E6f5717214004A7f26888',
   cro: '0xa0b73e1ff0b80914ab6fe0444e65848c4c34450b',
   crv: '0xd533a949740bb3306d119cc777fa900ba034cd52',
-  //dai: '0x6B175474E89094C44Da98b954EedeAC495271d0F',//replace with local deployed address
-  dai: '0xFD6F7A6a5c21A3f503EBaE7a473639974379c351',
-  enj: '0xaca81583840B1bf2dDF6CDe824ada250C1936B4D',
+  dai: '0xa6e99A4ED7498b3cdDCBB61a6A607a4925Faa1B7',
+  enj: '0x70bDA08DBe07363968e9EE53d899dFE48560605B',
   knc: '0xdefa4e8a7bcba345f687a2f1456f5edd9ce97202',
   kncl: '0xdd974D5C2e2928deA5F71b9825b8b646686BD200',
-  link: '0x514910771af9ca656af840dff83e8264ecf986ca',
+  link: '0xe1Fd27F4390DcBE165f4D60DBF821e4B9Bb02dEd',
   lrc: '0xbbbbca6a901c926f240b89eacb641d8aec7aeafd',
-  mana: '0x0f5d2fb29fb7d3cfee444a200298f468908cc942',
-  mkr: '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2',
+  mana: '0xB2b580ce436E6F77A5713D80887e14788Ef49c9A',
+  mkr: '0x870526b7973b56163a6997bB7C886F5E4EA53638',
   mln,
   nmr: '0x1776e1f26f98b1a5df9cd347953a26dd3cb46671',
   oxt: '0x4575f41308ec1483f3d399aa9a2826d74da13deb',
-  ren: '0x408e41876cccdc0f92210600ef50372656052a38',
+  ren: '0xB377a2EeD7566Ac9fCb0BA673604F9BF875e2Bab',
   rep: '0x221657776846890989a759ba2973e427dff5c9bb',
   rlc: '0x607f4c5bb672230e8672085532f7e901544a7375',
   snx: '0xc011a73ee8576fb46f5e1c5751ca3b9fe0af2a6f',
   susd: '0x57Ab1ec28D129707052df4dF418D58a2D46d5f51',
   sxp: '0x8ce9137d39326ad0cd6491fb5cc0cba0e089b6a9',
-  tusd: '0x0000000000085d4780B73119b644AE5ecd22b376',
-  uni: '0x1f9840a85d5af5bf1d1762f925bdaddc4201f984',
+  tusd: '0x0ed64d01D0B4B655E410EF1441dD677B695639E7',
+  uni: '0xaca81583840B1bf2dDF6CDe824ada250C1936B4D',
   usdc: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-  usdt: '0xdac17f958d2ee523a2206206994597c13d831ec7',
-  wbtc: '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599',
+  usdt: '0x986aaa537b8cc170761FDAC6aC4fc7F9d8a20A8C',
+  wbtc: '0xD49a0e9A4CD5979aE36840f542D2d7f02C4817Be',
   wnxm: '0x0d438f3b5175bebc262bf23753c1e53d03432bde',
-  yfi: '0x0bc529c00c6401aef6d220be8c6ea1667f6ad93e',
-  zrx: '0xE41d2489571d322189246DaFA5ebDe1F4699F498',
+  yfi: '0xefAB0Beb0A557E452b398035eA964948c750b2Fd',
+  zrx: '0xefc1aB2475ACb7E60499Efb171D173be19928a05',
 } as const;
 
 const aggregators = {
@@ -153,27 +153,26 @@ const ctokens = {
 const compoundComptroller = '0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B';
 
 const atokens = {
-  aaave: ['0x9E97b5f8B26cdd83444a56E24598fC39a8c78610', primitives.aave] as [string, string],
+  aaave: ['0x6cD41fF3Ac8D6E04975C4443a3646B87f5485AB3', primitives.aave] as [string, string],
   abal: ['0x272F97b7a56a387aE942350bBC7Df5700f8a4576', primitives.bal] as [string, string],
-  abusd: ['0xA361718326c15715591c299427c62086F69923D9', primitives.busd] as [string, string],
+  abusd: ['0x8aDd82adce4a1186E9c74cA8cbaF9B955D1C442C', primitives.busd] as [string, string],
   acrv: ['0x8dAE6Cb04688C62d939ed9B68d32Bc62e49970b1', primitives.crv] as [string, string],
-  //adai: ['0x028171bCA77440897B824Ca71D1c56caC55b68A3', primitives.dai] as [string, string], //replace address this also
-  adai: ['0x95FA4f12fe261f4c060eB8694627e50Cc20018E2', primitives.dai] as [string, string],
-  aenj: ['0x841a1e557d37320a372fC7F1ec78299C38AC79f9', primitives.enj] as [string, string],
+  adai: ['0xFe500bA0C974D39aCaF990Bc6dD1C638A663C82c', primitives.dai] as [string, string],
+  aenj: ['0xe0Af0e37de0192988c3A7EcA9583582A869c0B35', primitives.enj] as [string, string],
   aknc: ['0x39C6b3e42d6A679d7D776778Fe880BC9487C2EDA', primitives.kncl] as [string, string],
-  alink: ['0xa06bC25B5805d5F8d82847D191Cb4Af5A3e873E0', primitives.link] as [string, string],
-  amana: ['0xa685a61171bb30d4072B338c80Cb7b2c865c873E', primitives.mana] as [string, string],
-  amkr: ['0xc713e5E149D5D0715DcD1c156a020976e7E56B88', primitives.mkr] as [string, string],
-  aren: ['0xCC12AbE4ff81c9378D670De1b57F8e0Dd228D77a', primitives.ren] as [string, string],
+  alink: ['0xd990C4b99299841a95B1E7cF6D82875B3C797285', primitives.link] as [string, string],
+  amana: ['0x10ba2Fe95d6528eE384533f0084c1313AeF7cB76', primitives.mana] as [string, string],
+  amkr: ['0x446922f52C0d5a148EF4633F1a8bB89F47BB1490', primitives.mkr] as [string, string],
+  aren: ['0xf0E66944608307c31Eb716a471F877E7d954Df4F', primitives.ren] as [string, string],
   asnx: ['0x35f6B052C598d933D69A4EEC4D04c73A191fE6c2', primitives.snx] as [string, string],
   asusd: ['0x6C5024Cd4F8A59110119C56f8933403A539555EB', primitives.susd] as [string, string],
-  auni: ['0xB9D7CB55f463405CDfBe4E90a6D2Df01C2B92BF1', primitives.uni] as [string, string],
+  auni: ['0x171aBA10F864B5C1550f4734E27D8C0b65C24faA', primitives.uni] as [string, string],
   ausdc: ['0xBcca60bB61934080951369a648Fb03DF4F96263C', primitives.usdc] as [string, string],
-  ausdt: ['0x3Ed3B47Dd13EC9a98b44e6204A523E766B225811', primitives.usdt] as [string, string],
-  awbtc: ['0x9ff58f4fFB29fA2266Ab25e75e2A8b3503311656', primitives.wbtc] as [string, string],
+  ausdt: ['0xb84d8Eb7D2C9C74dEECa8B85821313cc8bE9Ef44', primitives.usdt] as [string, string],
+  awbtc: ['0xa83221CD2FAc53D82af2393c1c67fEB003fDA686', primitives.wbtc] as [string, string],
   aweth: ['0x030bA81f1c18d280636F32af80b9AAd02Cf0854e', weth] as [string, string],
-  ayfi: ['0x5165d24277cD063F5ac44Efd447B27025e888f37', primitives.yfi] as [string, string],
-  azrx: ['0xDf7FF54aAcAcbFf42dfe29DD6144A69b629f8C9e', primitives.zrx] as [string, string],
+  ayfi: ['0x019f5BC0f1691E62485B316138f2A1F634eE2012', primitives.yfi] as [string, string],
+  azrx: ['0x1F312Ae663853EB3E77de63fBC8aB5563B0272b3', primitives.zrx] as [string, string],
 };
 
 const pools = {
@@ -229,19 +228,16 @@ const unsupportedAssets = {
   eurs: '0xdb25f211ab05b1c97d595516f45794528a807ad8',
 };
 
-const ethUsdAggregator = '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419'; //replace with local deployed address
+const ethUsdAggregator = '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419';
 
 // prettier-ignore
 const mainnetConfig: DeploymentConfig = {
   aave: {
     atokens,
-    //lendingPoolAddressProvider: '0x8F4ec854Dd12F1fe79500a1f53D0cbB30f9b6134',
-    //protocolDataProvider: '0x9c65f85425c619A6cB6D29fF8d57ef696323d188',
-
-    lendingPoolAddressProvider: '0xaC47e91215fb80462139756f43438402998E4A3a',
-    protocolDataProvider: '0xA21DDc1f17dF41589BC6A5209292AED2dF61Cc94',
+    atokensIncluded: ["adai","aaave","atusd","abat","ausdt","azrx", "amkr","awbtc","alink","amana","aren","abusd","ayfi","auni","aenj"],
+    lendingPoolAddressProvider: '0x9BcC604D4381C5b0Ad12Ff3Bf32bEdE063416BC7',
+    protocolDataProvider: '0x2A590C461Db46bca129E8dBe5C3998A8fF402e76',
   },
-  
   chainlink: {
     aggregators,
     ethusd: ethUsdAggregator,

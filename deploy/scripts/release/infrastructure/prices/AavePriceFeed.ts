@@ -24,9 +24,9 @@ const fn: DeployFunction = async function (hre) {
 
   if (aavePriceFeed.newlyDeployed) {
     const aavePriceFeedInstance = new AavePriceFeed(aavePriceFeed.address, deployer);
-    const atokenValues = Object.values(config.aave.atokens).filter(
-      (x, index) => index == 0 || index == 4 || index == 5,
-    );
+    const atokenValues = Object.entries(config.aave.atokens)
+      .filter(([k, []]) => config.aave.atokensIncluded.includes(k))
+      .map(([, [v1, v2]]) => [v1, v2]);
 
     atokenValues.forEach((t) => console.log(JSON.stringify(t)));
 
@@ -34,6 +34,11 @@ const fn: DeployFunction = async function (hre) {
       const atokenDerivatives = atokenValues.map(([derivative]) => derivative);
       const atokenUnderlyings = atokenValues.map(([, underlying]) => underlying);
       log('Registering aave tokens');
+      log('Derivatives:');
+      atokenDerivatives.forEach((t) => console.log(JSON.stringify(t)));
+      log('Underlying:');
+      atokenUnderlyings.forEach((t) => console.log(JSON.stringify(t)));
+
       await aavePriceFeedInstance.addDerivatives(atokenDerivatives, atokenUnderlyings);
     }
   }
