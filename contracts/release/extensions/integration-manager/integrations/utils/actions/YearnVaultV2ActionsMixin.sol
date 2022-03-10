@@ -13,6 +13,7 @@ pragma solidity 0.6.12;
 
 import "../../../../../interfaces/IYearnVaultV2.sol";
 import "../../../../../utils/AssetHelpers.sol";
+import "hardhat/console.sol";
 
 /// @title YearnVaultV2ActionsMixin Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -25,8 +26,16 @@ abstract contract YearnVaultV2ActionsMixin is AssetHelpers {
         address _underlying,
         uint256 _underlyingAmount
     ) internal {
+        console.log("__yearnVaultV2Lend :recipient:%s", _recipient);
+        console.log("__yearnVaultV2Lend :_yVault:%s", _yVault);
+        console.log("__yearnVaultV2Lend :_underlying:%s", _underlying);
+        console.log("__yearnVaultV2Lend :_underlyingAmount:%d", _underlyingAmount);
+
         __approveAssetMaxAsNeeded(_underlying, _yVault, _underlyingAmount);
+        console.log("__yearnVaultV2Lend after approve");
+
         IYearnVaultV2(_yVault).deposit(_underlyingAmount, _recipient);
+        console.log("__yearnVaultV2Lend after deposit");
     }
 
     /// @dev Helper to redeem yVault shares for underlying

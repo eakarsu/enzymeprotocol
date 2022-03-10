@@ -33,9 +33,27 @@ const fn: DeployFunction = async function (hre) {
       }),
     );
 
+    console.log('yearnVaultV2PriceFeed: underlyings');
+    underlyings.forEach((x) => console.log(x));
+    console.log('yearnVaultV2PriceFeed: yVaults');
+    yVaults.forEach((x) => console.log(x));
+
+    const underlyings2 = underlyings.map((x) => {
+      if (x == '0x6B175474E89094C44Da98b954EedeAC495271d0F') {
+        console.log(
+          'Replacing dai address at mainnet 0x19D3364A399d251E894aC732651be8B0E4e85001 to local one' +
+            config.primitives.dai,
+        );
+
+        return config.primitives.dai;
+      } else return x;
+    });
+    console.log('yearnVaultV2PriceFeed: modified underlyings');
+    underlyings2.forEach((x) => console.log(x));
+
     if (!!yVaults.length) {
       log('Registering yearn vault v2 tokens');
-      await yearnVaultV2PriceFeedInstance.addDerivatives(yVaults, underlyings);
+      await yearnVaultV2PriceFeedInstance.addDerivatives(yVaults, underlyings2);
     }
   }
 };

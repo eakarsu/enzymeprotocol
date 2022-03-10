@@ -13,6 +13,7 @@ pragma solidity 0.6.12;
 
 import "../../core/fund/comptroller/IComptroller.sol";
 import "../../core/fund/vault/IVault.sol";
+import "hardhat/console.sol";
 
 /// @title PermissionedVaultActionMixin Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -145,9 +146,17 @@ abstract contract PermissionedVaultActionMixin {
         address _target,
         uint256 _amount
     ) internal {
+        console.log("__preProcessCoI:__withdrawAssetTo for _asset  %s", _asset);
+        console.log("__preProcessCoI:__withdrawAssetTo for _target  %s", _target);
+        console.log("__preProcessCoI:__withdrawAssetTo for _amount  %d", _amount);
+        console.log(
+            "__preProcessCoI:IVault.VaultAction.WithdrawAssetTo   %d",
+            uint256(IVault.VaultAction.WithdrawAssetTo)
+        );
         IComptroller(_comptrollerProxy).permissionedVaultAction(
             IVault.VaultAction.WithdrawAssetTo,
             abi.encode(_asset, _target, _amount)
         );
+        console.log("__preProcessCoI: after permissionedVaultAction   %d", _amount);
     }
 }

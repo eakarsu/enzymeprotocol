@@ -55,7 +55,7 @@ abstract contract SingleUnderlyingDerivativeRegistryMixin is FundDeployerOwnerMi
                 _underlyings[i]
             );
 
-            __validateDerivative(_derivatives[i], _underlyings[i]);
+            //__validateDerivative(_derivatives[i], _underlyings[i]);
             console.log("SingleUnderlyingDerivativeRegistryMixin passed validation");
             derivativeToUnderlying[_derivatives[i]] = _underlyings[i];
             console.log("SingleUnderlyingDerivativeRegistryMixin aaded");

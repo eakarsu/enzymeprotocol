@@ -14,6 +14,7 @@ pragma solidity 0.6.12;
 import "../../../../infrastructure/price-feeds/derivatives/feeds/YearnVaultV2PriceFeed.sol";
 import "../utils/actions/YearnVaultV2ActionsMixin.sol";
 import "../utils/AdapterBase.sol";
+import "hardhat/console.sol";
 
 /// @title YearnVaultV2Adapter Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -50,6 +51,7 @@ contract YearnVaultV2Adapter is AdapterBase, YearnVaultV2ActionsMixin {
             uint256[] memory spendAssetAmounts,
             address[] memory incomingAssets
         ) = __decodeAssetData(_assetData);
+        console.log("lend underlying:");
 
         __yearnVaultV2Lend(_vaultProxy, incomingAssets[0], spendAssets[0], spendAssetAmounts[0]);
     }
@@ -147,9 +149,17 @@ contract YearnVaultV2Adapter is AdapterBase, YearnVaultV2ActionsMixin {
             uint256 outgoingUnderlyingAmount,
             uint256 minIncomingYVaultSharesAmount
         ) = __decodeLendCallArgs(_actionData);
+        console.log("__parseAssetsForLend started");
+        console.log("__parseAssetsForLend yVault:%s", yVault);
+        console.log("__parseAssetsForLend outgoingUnderlyingAmount:%d", outgoingUnderlyingAmount);
+        console.log(
+            "__parseAssetsForLend minIncomingYVaultSharesAmount:%d",
+            minIncomingYVaultSharesAmount
+        );
 
         address underlying = __getUnderlyingForYVault(yVault);
         require(underlying != address(0), "__parseAssetsForLend: Unsupported yVault");
+        console.log("__parseAssetsForLend underlying:%s", underlying);
 
         spendAssets_ = new address[](1);
         spendAssets_[0] = underlying;

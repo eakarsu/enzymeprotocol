@@ -14,6 +14,7 @@ pragma solidity 0.6.12;
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
+import "hardhat/console.sol";
 
 /// @title AssetHelpers Contract
 /// @author Enzyme Council <security@enzyme.finance>
@@ -31,12 +32,18 @@ abstract contract AssetHelpers {
         uint256 _neededAmount
     ) internal {
         uint256 allowance = ERC20(_asset).allowance(address(this), _target);
+        console.log("__approveAssetMaxAsNeeded:allowance:%d", allowance);
+
         if (allowance < _neededAmount) {
+            console.log("__approveAssetMaxAsNeeded:before approve");
             if (allowance > 0) {
-                ERC20(_asset).safeApprove(_target, 0);
+                ERC20(_asset).approve(_target, 0);
+                console.log("__approveAssetMaxAsNeeded:approved 1");
             }
-            ERC20(_asset).safeApprove(_target, type(uint256).max);
+            ERC20(_asset).approve(_target, type(uint256).max);
+            console.log("__approveAssetMaxAsNeeded:approved 2");
         }
+        console.log("__approveAssetMaxAsNeeded:approved 3");
     }
 
     /// @dev Helper to transfer full asset balances from the current contract to a target

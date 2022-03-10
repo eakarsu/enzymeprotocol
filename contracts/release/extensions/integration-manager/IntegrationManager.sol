@@ -22,6 +22,7 @@ import "../utils/ExtensionBase.sol";
 import "../utils/PermissionedVaultActionMixin.sol";
 import "./integrations/IIntegrationAdapter.sol";
 import "./IIntegrationManager.sol";
+import "hardhat/console.sol";
 
 /// @title IntegrationManager
 /// @author Enzyme Council <security@enzyme.finance>
@@ -267,6 +268,7 @@ contract IntegrationManager is
             maxSpendAssetAmounts,
             preCallSpendAssetBalances
         ) = __preProcessCoI(_comptrollerProxy, _vaultProxy, _adapter, _selector, _integrationData);
+        console.log("after __preProcessCoI call");
 
         __executeCoI(
             _vaultProxy,
@@ -275,6 +277,7 @@ contract IntegrationManager is
             _integrationData,
             abi.encode(spendAssets_, maxSpendAssetAmounts, incomingAssets_)
         );
+        console.log("after __executeCoI call");
 
         (incomingAssetAmounts_, spendAssetAmounts_) = __postProcessCoI(
             _comptrollerProxy,
@@ -288,6 +291,7 @@ contract IntegrationManager is
             maxSpendAssetAmounts,
             preCallSpendAssetBalances
         );
+        console.log("after __postProcessCoI call");
 
         return (incomingAssets_, incomingAssetAmounts_, spendAssets_, spendAssetAmounts_);
     }
@@ -314,6 +318,8 @@ contract IntegrationManager is
         bytes memory _integrationData,
         bytes memory _assetData
     ) private {
+        console.log("__executeCoI:_adapter:%s", _adapter);
+
         (bool success, bytes memory returnData) = _adapter.call(
             abi.encodeWithSelector(_selector, _vaultProxy, _integrationData, _assetData)
         );
@@ -383,8 +389,13 @@ contract IntegrationManager is
                 IValueInterpreter(getValueInterpreter()).isSupportedAsset(incomingAssets_[i]),
                 "__preProcessCoI: Non-receivable incoming asset"
             );
-
+            console.log("__preProcessCoI:balance of %s", incomingAssets_[i]);
+            console.log("__preProcessCoI:balance to _vaultProxy %s", _vaultProxy);
             preCallIncomingAssetBalances_[i] = ERC20(incomingAssets_[i]).balanceOf(_vaultProxy);
+            console.log(
+                "__preProcessCoI:balance preCallIncomingAssetBalances_[i]  %d",
+                preCallIncomingAssetBalances_[i]
+            );
         }
 
         // SPEND ASSETS
@@ -392,7 +403,12 @@ contract IntegrationManager is
         preCallSpendAssetBalances_ = new uint256[](spendAssets_.length);
         for (uint256 i; i < spendAssets_.length; i++) {
             preCallSpendAssetBalances_[i] = ERC20(spendAssets_[i]).balanceOf(_vaultProxy);
-
+            console.log("__preProcessCoI:spendAssets_[i]:%s", spendAssets_[i]);
+            console.log("__preProcessCoI:_vaultProxy[i]:%s", _vaultProxy);
+            console.log(
+                "__preProcessCoI:preCallSpendAssetBalances_[i] %d",
+                preCallSpendAssetBalances_[i]
+            );
             // Grant adapter access to the spend assets.
             // spendAssets_ is already asserted to be a unique set.
             if (spendAssetsHandleType_ == SpendAssetsHandleType.Approve) {
@@ -404,12 +420,17 @@ contract IntegrationManager is
                     maxSpendAssetAmounts_[i]
                 );
             } else if (spendAssetsHandleType_ == SpendAssetsHandleType.Transfer) {
+                console.log(
+                    "__preProcessCoI:__withdrawAssetTo from _comptrollerProxy %s",
+                    _comptrollerProxy
+                );
                 __withdrawAssetTo(
                     _comptrollerProxy,
                     spendAssets_[i],
                     _adapter,
                     maxSpendAssetAmounts_[i]
                 );
+                console.log("__preProcessCoI: after __withdrawAssetTo");
             }
         }
     }
