@@ -26,4 +26,14 @@ interface IYearnVaultV2 {
         address,
         uint256
     ) external returns (uint256);
+
+    function setEmergencyShutdown(bool) external;
+
+    function availableDepositLimit() external view returns (uint256);
+
+    function emergencyShutdown() external view returns (bool);
+
+    function setDepositLimit(uint256) external;
+
+    function totalAssets() external view returns (uint256);
 }

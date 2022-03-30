@@ -34,6 +34,13 @@ abstract contract YearnVaultV2ActionsMixin is AssetHelpers {
         __approveAssetMaxAsNeeded(_underlying, _yVault, _underlyingAmount);
         console.log("__yearnVaultV2Lend after approve");
 
+        uint256 availableDepositLimit = IYearnVaultV2(_yVault).availableDepositLimit();
+        console.log("__yearnVaultV2Lend :availableDepositLimit:%d", availableDepositLimit);
+        uint256 pricePerShare = IYearnVaultV2(_yVault).pricePerShare();
+        console.log("__yearnVaultV2Lend :pricePerShare:%d", pricePerShare);
+        address token = IYearnVaultV2(_yVault).token();
+        console.log("__yearnVaultV2Lend :token:%s", token);
+
         IYearnVaultV2(_yVault).deposit(_underlyingAmount, _recipient);
         console.log("__yearnVaultV2Lend after deposit");
     }

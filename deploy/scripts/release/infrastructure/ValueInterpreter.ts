@@ -30,11 +30,18 @@ const fn: DeployFunction = async function (hre) {
     skipIfAlreadyDeployed: true,
   });
 
+  console.log(
+    'valueInterpreter.newlyDeployed:' +
+      valueInterpreter.newlyDeployed +
+      ' valueInterpreter.address:' +
+      valueInterpreter.address,
+  );
+
   if (valueInterpreter.newlyDeployed) {
     const valueInterpreterInstance = new ValueInterpreter(valueInterpreter.address, deployer);
 
     // Add ChainlinkPriceFeedMixin config
-
+    console.log('valueInterpreter before setEthUsdAggregator: valueInterpreterInstance:' + valueInterpreterInstance);
     await valueInterpreterInstance.setEthUsdAggregator(config.chainlink.ethusd);
 
     console.log('ValueInterpreter start');

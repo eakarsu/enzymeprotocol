@@ -12,6 +12,8 @@ export async function saveConfig(hre: HardhatRuntimeEnvironment, data: Deploymen
 }
 
 export async function loadConfig(hre: HardhatRuntimeEnvironment) {
+  console.log('load Config:' + JSON.stringify(hre.deployments));
+
   const deployment = await hre.deployments.get('Config');
 
   return deployment.linkedData as DeploymentConfig;
