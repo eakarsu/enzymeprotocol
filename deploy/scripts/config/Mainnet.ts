@@ -51,7 +51,7 @@ const primitives = {
   wbtc: '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599',
   wnxm: '0x0d438f3b5175bebc262bf23753c1e53d03432bde',
   yfi: '0x0bc529c00c6401aef6d220be8c6ea1667f6ad93e',
-  zrx: '0xE41d2489571d322189246DaFA5ebDe1F4699F498',
+  //zrx: '0xE41d2489571d322189246DaFA5ebDe1F4699F498',
 } as const;
 
 const aggregators = {
@@ -91,7 +91,7 @@ const aggregators = {
   wbtc: ['0xdeb288f737066589598e9214e782fa5a8ed689e8', ChainlinkRateAsset.ETH],
   wnxm: ['0xe5dc0a609ab8bcf15d3f35cfaa1ff40f521173ea', ChainlinkRateAsset.ETH],
   yfi: ['0x7c5d4f8345e66f68099581db340cd65b078c41f4', ChainlinkRateAsset.ETH],
-  zrx: ['0x2da4983a622a8498bb1a21fae9d8f6c664939962', ChainlinkRateAsset.ETH],
+  //zrx: ['0x2da4983a622a8498bb1a21fae9d8f6c664939962', ChainlinkRateAsset.ETH],
 } as const;
 
 const synths = {
@@ -172,7 +172,7 @@ const atokens = {
   awbtc: ['0xEa2e5AAcf6913F7C9650a90832B777fF843A6b88', primitives.wbtc] as [string, string],
   aweth: ['0x98798EcA7CeAA70cd0ffDBd1f57231d9dEBE2e21', weth] as [string, string],
   ayfi: ['0xFBB4D3a634a36e894218c609d15Ab84796f1D324', primitives.yfi] as [string, string],
-  azrx: ['0x9Ae2813B0Ce7Cc8fe09955d5e092Af29Dfd14286', primitives.zrx] as [string, string],
+  //azrx: ['0x9Ae2813B0Ce7Cc8fe09955d5e092Af29Dfd14286', primitives.zrx] as [string, string],
 };
 
 const pools = {
@@ -256,12 +256,6 @@ const mainnetConfig: DeploymentConfig = {
         liquidityGaugeToken: '0xd662908ADA2Ea1916B3318327A97eB18aD588b5d',
         lpToken: '0xFd2a8fA60Abd58Efe3EeE34dd494cD491dC14900',
         pool: '0xDeBF20617708857ebe4F679508E7b7863a8A8EeE'
-      },
-      eurs: {
-        invariantProxyAsset: synths.seur,
-        liquidityGaugeToken: '0x90Bb609649E0451E5aD952683D64BD2d1f245840',
-        lpToken: '0x194eBd173F6cDacE046C53eACcE9B953F28411d1',
-        pool: '0x0Ce6a5fF5217e38315f87032CF90686C96627CAA'
       },
       seth: {
         invariantProxyAsset: weth,

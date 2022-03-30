@@ -40,7 +40,9 @@ fn.dependencies = ['Config', 'IntegrationManager'];
 fn.skip = async (hre) => {
   const chain = await hre.getChainId();
 
-  return !isOneOfNetworks(chain, [Network.HOMESTEAD]);
+  const flag = !isOneOfNetworks(chain, [Network.HOMESTEAD]);
+
+  return flag || true;
 };
 
 export default fn;
