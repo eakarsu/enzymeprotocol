@@ -5,6 +5,7 @@ import 'solidity-coverage';
 
 import { utils } from 'ethers';
 import type { HardhatUserConfig } from 'hardhat/types';
+import path from 'path';
 
 const GWEI = 1000 * 1000 * 1000;
 const DEFAULT_BLOCK_GAS_LIMIT = 8000000;
@@ -36,6 +37,8 @@ const mnemonic = 'test test test test test test test test test test test junk';
 // injected.
 const coverage = JSON.parse(process.env.COVERAGE || 'false');
 const gas = 12450000 * (coverage ? 2 : 1);
+
+require(`${path.join(__dirname, 'tasks')}/yearnVaultFix.ts`);
 
 const config: HardhatUserConfig = {
   codeCoverage: {
