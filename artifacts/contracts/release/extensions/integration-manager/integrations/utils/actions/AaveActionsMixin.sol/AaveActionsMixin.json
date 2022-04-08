@@ -1,0 +1,48 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "AaveActionsMixin",
+  "sourceName": "contracts/release/extensions/integration-manager/integrations/utils/actions/AaveActionsMixin.sol",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_lendingPoolAddressProvider",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "getAaveLendingPoolAddressProvider",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "aaveLendingPoolAddressProvider_",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getAaveReferralCode",
+      "outputs": [
+        {
+          "internalType": "uint16",
+          "name": "aaveReferralCode_",
+          "type": "uint16"
+        }
+      ],
+      "stateMutability": "pure",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

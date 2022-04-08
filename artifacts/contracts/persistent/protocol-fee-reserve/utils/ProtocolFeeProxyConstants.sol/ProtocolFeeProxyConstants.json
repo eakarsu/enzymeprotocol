@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "ProtocolFeeProxyConstants",
+  "sourceName": "contracts/persistent/protocol-fee-reserve/utils/ProtocolFeeProxyConstants.sol",
+  "abi": [],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}
