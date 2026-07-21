@@ -9,6 +9,21 @@ on:
       - v[1-9]*
       - audit/*
 jobs:
+  repository-policy:
+    name: Reference repository policy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16
+
+      - name: Verify provenance and safety boundaries
+        run: node scripts/repository-policy.test.js
+
   test:
     name: Test
     runs-on: ubuntu-latest

@@ -1,58 +1,23 @@
-name: Publish
+name: Publish disabled for reference fork
 
 on:
-  push:
-    branches:
-      - v4
+  workflow_dispatch:
 
 jobs:
-  publish:
-    if: github.repository == 'avantgardefinance/protocol'
-    name: Publish
+  reference-only:
+    name: Confirm publishing is disabled
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v4
 
       - name: Set up node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: 16
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Verify provenance and safety boundaries
+        run: node scripts/repository-policy.test.js
 
-      - name: Yarn cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Hardhat artifact cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            artifacts
-            cache/solidity-files-cache.json
-          key: ${{ runner.os }}-artifacts-${{ hashFiles('contracts/**/*.sol') }}
-          restore-keys: |
-            ${{ runner.os }}-artifacts-
-
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Create release pull request or publish
-        id: changesets
-        uses: changesets/action@master
-        with:
-          publish: yarn release
-          title: 'chore: publish private packages'
-          commit: 'chore: publish private packages'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Explain status
+        run: echo "This historical reference fork has no publishing workflow."

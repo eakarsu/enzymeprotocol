@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "decision": "retain-as-historical-reference",
+  "classification": "not-an-app",
+  "productBoundary": "none",
+  "maintenanceOwner": "repository-owner:eakarsu",
+  "securityPatchOwner": "repository-owner:eakarsu",
+  "upstream": {
+    "name": "Enzyme Protocol",
+    "repository": "https://github.com/enzymefinance/protocol",
+    "baseCommit": "fec37a7e"
+  },
+  "fork": {
+    "repository": "https://github.com/eakarsu/enzymeprotocol",
+    "branch": "v4",
+    "retainedBaselineCommit": "2402153a69c8a9c24284f9011df79fdf5e5fbcfb",
+    "localCommitsAfterBase": 20
+  },
+  "supportedVersion": {
+    "protocolPackage": "4.0.0-next.4",
+    "testutilsPackage": "4.0.0-next.3",
+    "node": "16 (historical reproduction only)",
+    "solidity": ["0.7.6", "0.6.12"]
+  },
+  "license": {
+    "spdx": "GPL-3.0",
+    "file": "LICENSE"
+  },
+  "supportedActivities": ["source-inspection", "local-compilation", "historical-test-reproduction"],
+  "unsupportedActivities": ["package-publishing", "public-network-deployment", "production-use"],
+  "updateStrategy": "frozen-manual-review-no-automatic-merges",
+  "reviewCadence": "annual-and-before-any-reuse",
+  "auditDocuments": [
+    {
+      "path": "audits/2021-01-CS-protocol-v2-audit.pdf",
+      "sha256": "b629195ec235e04278d6b5ae86fd5211c5015bc9fe7a144c439ad0ba0091fdbf"
+    },
+    {
+      "path": "audits/2021-09-CS-protocol-v4-audit.pdf",
+      "sha256": "e543fbddc76c42e18f6ca4b4a88825a76a569ddb486076addaa38c9b27ae1ba1"
+    },
+    {
+      "path": "audits/2021-10-OZ-protocol-v4-audit.pdf",
+      "sha256": "a276d0f903b0519099ab2c3311120a97b83d41864fec0a54eff7f158ca0848a5"
+    }
+  ]
+}

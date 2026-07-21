@@ -7,6 +7,13 @@ import { utils } from 'ethers';
 import type { HardhatUserConfig } from 'hardhat/types';
 import path from 'path';
 
+// This pure-JavaScript guard also protects direct `hardhat --network ...`
+// invocations that bypass the package scripts.
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { assertSupportedNetwork } = require('./scripts/repository-policy-lib');
+
+assertSupportedNetwork(process.argv.slice(2));
+
 const GWEI = 1000 * 1000 * 1000;
 const DEFAULT_BLOCK_GAS_LIMIT = 8000000;
 const DEFAULT_GAS_MUL = 5;
@@ -123,30 +130,15 @@ const config: HardhatUserConfig = {
       initialBaseFeePerGas: 0,
     },
     kovan: {
-      //accounts: [`${process.env.KEY}`],
-      accounts: [
-        '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80',
-        '0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d',
-        '0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a',
-      ],
-      //hardfork: HARDFORK,
+      accounts: accounts('kovan'),
       blockGasLimit: DEFAULT_BLOCK_GAS_LIMIT,
-
       chainId: 42,
-
       gasMultiplier: DEFAULT_GAS_MUL,
       gasPrice: 3 * GWEI,
-      url: 'https://eth-kovan.alchemyapi.io/v2/gURHc2znmQ9VlBz0e4qlQSsXia-SgqOj',
+      url: node('kovan'),
     },
     localhost: {
-      //Remove accounts before testing unlock mainnet users and test contracts
-      accounts: [
-        '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80',
-        '0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d',
-        '0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a',
-      ],
       chainId: 1,
-      //chainId: 31337,
       loggingEnabled: true,
       timeout: 10000000,
       url: 'http://localhost:8545',
@@ -189,8 +181,8 @@ const config: HardhatUserConfig = {
     ],
   },
   tenderly: {
-    project: 'prosperity',
-    username: 'eakarsu',
+    project: process.env.TENDERLY_PROJECT || 'reference-only',
+    username: process.env.TENDERLY_USERNAME || 'reference-only',
   },
 };
 
